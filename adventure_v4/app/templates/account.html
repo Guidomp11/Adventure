@@ -1,0 +1,41 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<div class="container">
+    <h1 class="mb-4">Bienvenido {{user.username}} !</h1>
+
+    
+    {% if(stories.count() <= 0): %}
+        <h3 class="mb-4"><em>Todavia no has creado ninguna historia</em></h3>
+    {% else: %}
+        <h2 class="mb-4"><u>Tus Historias</u></h2>
+    {% endif %}
+
+    {% if(stories != None): %}
+        {% for story in stories %}	
+        <div>
+            <h3>{{ story.title }}</h3>
+            <!--<h6></h6> parrafos + el boton de agregar uno nuevo -->
+            {% for passage in passages %}	
+                {% if(passage.story_id == story.id): %}
+                    <h6>{{ passage.paragraph }}</h6>
+                {% endif %}
+            {% endfor %}
+            <button type="button" class="btn btn-info mt-1 mb-4"><a href='/story/addPassage'>Agregar un nuevo pasaje</a></button>
+            <button type="button" class="btn btn-info mt-1 mb-4"><a href='/story/createPassageLink/{{story.id}}'>Enlazar pasajes</a></button>
+    
+        </div>
+        {% endfor %}
+
+        
+        <button type="button" class="btn btn-success mt-5"><a href="/createStory">Crear historia</a></button>
+    {% endif %}
+    
+    
+    
+</div>
+
+{{ super() }}
+    
+{% endblock %}

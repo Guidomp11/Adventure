@@ -1,0 +1,19 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+
+<h1 class="text-center mt-2">ELIGE UNA HISTORIA DE NUESTRO CATALOGO</h1>
+
+	<div class="container index mt-3">
+		<ul>
+			{% for story in stories %}	
+				<li class="story"><i class="fas fa-book-open mr-2"></i><a href={{ url_for('show_story', story_id=story.story.id)}}><strong>TITULO:</strong> <em>{{ story.story.title }}</em> <strong>AUTOR:</strong> <em>{{ story.author }}</em></a></li>
+			{% endfor %}
+		</ul>
+	</div>
+
+
+{{ super() }}
+
+{% endblock %}

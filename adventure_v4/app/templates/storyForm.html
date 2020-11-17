@@ -1,0 +1,39 @@
+{% extends 'base.html' %}
+
+{% block content %}
+	
+	{% with messages = get_flashed_messages(with_categories=true) %}
+		{% if messages %}
+	
+		{% for category, message in messages %}
+		  <div class="alert alert-{{ category }} alert-dismissible" role="alert">
+		  <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+		  <!-- <strong>Title</strong> --> {{ message }}
+		  </div>
+		  <hr/>
+		{% endfor %}
+	
+		{% endif %}
+	{% endwith %}
+	
+	
+	{% if form.errors %}
+		{{ form.errors }}
+	{% endif %}
+	<div class="container-fluid">
+		<form action="{{ url_for('createStory') }}", method="POST">
+			{{ form.hidden_tag() }}
+	
+			<h4 class="mt-3">{{ form.title.label }}</h4>
+			<p>
+				
+				{{ form.title(rows='10', cols='50') }}
+			</p>
+	
+			<p>{{ form.submit(class="btn btn-success") }}</p>
+		</form>
+		
+	</div>
+	
+	
+{% endblock %}

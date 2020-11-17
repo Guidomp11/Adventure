@@ -1,0 +1,74 @@
+{% extends 'base.html' %}
+
+{% block content %}
+	
+	{% with messages = get_flashed_messages(with_categories=true) %}
+		{% if messages %}
+	
+		{% for category, message in messages %}
+		  <div class="alert alert-{{ category }} alert-dismissible" role="alert">
+		  <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+		  <!-- <strong>Title</strong> --> {{ message }}
+		  </div>
+		  <hr/>
+		{% endfor %}
+	
+		{% endif %}
+	{% endwith %}
+	
+	{% if form.errors %}
+		{{ form.errors }}
+	{% endif %}
+	<div class="container-fluid">
+		<form action="{{ url_for('edit') }}", method="POST">
+			{{ form.hidden_tag() }}
+			
+			<h4 class="mt-3">Elige uan historia</h4>
+			<select name="story_id" id="story">
+				<option value="" hidden>Seleccione historia del pasaje</option>
+				{% for story in stories %}
+		  			<option value="{{story.id}}" name="story_id">{{story.title}}</option>
+				{% endfor %}
+			</select>
+
+			<h4 class="mt-3">{{ form.paragraph.label }}</h4>
+			<p>
+				{{ form.paragraph(rows='10', cols='50') }}
+			</p>
+	
+
+			
+	
+			<p>{{ form.submit(class="btn btn-success") }}</p>
+		</form>
+		
+	</div>
+	
+	
+	<script>
+		window.addEventListener('load', () => {
+			let decision1Select = document.querySelector('#decision1')
+			let decision2Select = document.querySelector('#decision2')
+			let storySelected = document.querySelector('#story')
+
+			storySelected.addEventListener('change', e => {
+				let id = e.target.value;
+				fetch('/story/passages/'+id)
+				.then(response => {
+					return response.json();
+				})
+				.then(passages => {
+					for(let i = 0; i < passages.length; i++){
+						decision1Select.innerHTML+=`
+							<option value="${passages[i].id}" name="decision_1">${passages[i].paragraph}</option>
+						`;
+						decision2Select.innerHTML+=`
+							<option value="${passages[i].id}" name="decision_1">${passages[i].paragraph}</option>
+						`;
+					}
+				})
+			})
+		})
+	</script>
+
+{% endblock %}

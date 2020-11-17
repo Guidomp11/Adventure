@@ -1,0 +1,54 @@
+---en story form---
+<p>
+				{{ form.id.label }}
+				{{ form.id }}
+			</p>
+
+---Passage form --
+
+<p>
+				{{ form.id.label }}
+				{{ form.id }}
+			</p>
+
+			---------story
+			<p>{{passage.link_1}}</p>
+
+
+<ul>
+    <li> <a href={{ url_for('show_story', story_id=story.id , passage_id=passage.link_1 ) }}>A</a> </li>
+    <li> <a href={{ url_for('show_story', story_id=story.id , passage_id=passage.link_2 ) }}>B</a> </li>
+</ul>
+
+-------------A ROMERLA--------------------
+edit:
+<select name="decision_1" id="decision1">
+				{% for passage in passages %}
+		  			<!--<option value="{{passage.id}}" name="decision_1">{{passage.paragraph}}</option>-->
+				{% endfor %}
+			</select>
+			<p>
+				{{ form.decision_1_text.label }}
+				{{ form.decision_1_text }}
+			</p>
+
+			<select name="decision_2" id="decision2">
+				{% for passage in passages %}
+		  			<!--<option value="{{passage.id}}" name="decision_2">{{passage.paragraph}}</option>-->
+				{% endfor %}
+			</select>
+			<p>
+				{{ form.decision_2_text.label }}
+				{{ form.decision_2_text }}
+			</p>
+
+story: 
+<p>{{passage.link_1}}</p>
+    
+    <ul>
+        <li> <a href={{ url_for('change_passage', story_id=story.id , passage_id=passage.link_1 ) }}>{{passage.link_1_text}}</a> </li>
+        <li> <a href={{ url_for('change_passage', story_id=story.id , passage_id=passage.link_2 ) }}>{{passage.link_2_text}}</a> </li>
+    </ul>
+
+
+Interactive Fiction Web Engine™

@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="container index">
+    <h1 class="mt-2 story-title">{{story.title}}</h1>
+
+
+    {% if passage != None: %}
+        <p>{{passage.paragraph}}</p>
+    {% endif %}
+    {% if links != None: %}
+        {% if links.count() > 0: %}
+            <h4>Elige un camino</h4>
+            {% for link in links: %}
+                <p class="story"><i class="fas fa-arrow-right mr-2"></i><a href="{{ url_for('change_passage', story_id=story.id, passage_id=link.destination_paragraph_id) }}">{{link.link_description}}</a></p>
+            {% endfor %}
+        {% else: %}
+            <h4>Fin</h4>
+            <p class="story"><i class="fas fa-arrow-right mr-2"></i><a href="{{ url_for('index') }}">Volver al inicio</a></p>
+        {% endif %}
+    {% endif %}
+</div>
+
+
+
+{{ super() }}
+
+{% endblock %}

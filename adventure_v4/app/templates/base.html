@@ -1,0 +1,96 @@
+<head>
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
+	<style>
+		body{
+			height: calc(100vh - 56px);
+			/*background-color: #4a4f5f;*/
+			background-color: #464B59;
+		}
+		p, label, span, h1, h2, h3, h4, h5, h6, li, strong, em, a{
+			color: white;
+		}
+		footer{
+			width: 100vw;
+			background-color: #212529;
+			position: absolute;
+			bottom: 0;
+			color: white;
+			padding: 10px;
+		}
+		footer p{
+			text-align: center;
+		}
+		.story-title{
+			border-bottom: 2px solid black;
+		}
+		.index ul{
+			list-style: none;
+		}
+		a{
+			color: white;
+			text-decoration: none;
+		}
+		a:hover{
+			color: whitesmoke;
+			text-decoration: none;
+		}
+		
+		.index .story:hover{
+			
+			margin-left: 15px;
+			transition: margin-left .3s ease;
+		}
+	</style>
+</head>
+
+{% block navbar %}
+	<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+		<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+			<span class="navbar-toggler-icon"></span>
+		  </button>
+		
+		  <div class="collapse navbar-collapse" id="navbarSupportedContent">
+			<ul class="navbar-nav mr-auto">
+				<li class="nav-item active">
+				<a class="nav-link" href="/">IFWE™ <span class="sr-only">(current)</span></a>
+				</li>
+	
+				{% if user != None: %}
+				<li class="nav-item">
+					<a class="nav-link" href="/account">Account</a>
+				</li>
+				{% else: %}
+					<li class="nav-item">
+						<a class="nav-link" href="/register">Sign in</a>
+					</li>
+					<li class="nav-item">
+						<a class="nav-link" href="/login">Log In</a>
+					</li>
+				{% endif %}
+				
+			</ul>
+			{% if user != None: %}
+			<ul class="form-inline my-2 my-lg-0 navbar-nav ml-auto">
+				<li class="nav-item">
+					<a class="nav-link" href="/logout">Log out</a>
+				</li>
+			</ul>
+				
+			{% endif %}
+		</div>
+	</nav>
+
+
+{% endblock %}
+
+{% block content %}
+<footer>
+	<p>Copyright IPCAC © 2020</p>
+</footer>
+
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" crossorigin="anonymous"></script>
+	
+{% endblock %}

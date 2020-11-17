@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+{% for node in passages %}
+	{% if node.id == passage_id %}
+		<p>{{ node.paragraph }}</p>
+		<ul>
+		{% if(node.count() > 0): %}
+			{% for link in node.links %}
+				<li> <a href={{ url_for('show_passage', passage_id=link.id) }}>{{ link.text }}</a> </li>
+			{% endfor %}
+		{% else: %}
+			<h6><a href="{{ url_for('index') }}">Fin</a></h6>
+		{% endif %}
+
+		</ul>
+	{% endif %}
+{% endfor %}
+
+{{ super() }}
+
+{% endblock %}
